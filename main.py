@@ -26,9 +26,36 @@ MENU = {
  
 resources = {
     "water": 300,
-    "milk": 200,
-    "coffee": 100,
+    "milk": 20,
+    "coffee": 100
 }
 
-print(f"What would you like? (espresso/latte/cappucino):")
+def resources_sufficient(prompt):
+    for items in resources:
+        if MENU[prompt]['ingredients'][items] >= resources[items]:
+            print(f"Sorry there is not enough {items}.")
+            resources_out = True
+            return resources_out        
+
+prompt = input(f"What would you like? (espresso/latte/cappuccino):")
+
+if resources_sufficient(prompt) == None:
+    print(f"There are enough resources, we can proceed to the next task")
+
+
+machine_on = True
+
+# while machine_on:
+
+#     if prompt == 'off':
+#         break
+#     elif prompt == "report":
+#         print(f"report to follow")
+#     elif prompt == "espresso":
+#         print("espresso selected")
+#     elif prompt == "latte":
+#         print("latte seelcted")
+#     elif prompt == "cappucino":
+#         print(f"cappucino selected")
+    
 
