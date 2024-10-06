@@ -40,15 +40,10 @@ def resources_sufficient(prompt):
             return resources_out        
 
 def coin_counter(prompt):
-    quarters = float(input("How many quarters?"))
-    dimes = float(input("How many dimes?"))
-    nickles = float(input("How many nickles?"))
-    pennies = float(input("How many pennies?"))
-
-    quarters *= 0.25
-    dimes *= 0.10
-    nickles *= 0.05
-    pennies *= 0.01
+    quarters = 0.25 * float(input("How many quarters?"))
+    dimes = 0.10 * float(input("How many dimes?"))
+    nickles =  0.05 * float(input("How many nickles?"))
+    pennies = 0.01 * float(input("How many pennies?"))
 
     total = sum([quarters,dimes,nickles,pennies])
 
