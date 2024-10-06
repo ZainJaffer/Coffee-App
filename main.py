@@ -36,8 +36,8 @@ def resources_sufficient(prompt):
     for items in resources:
         if MENU[prompt]['ingredients'][items] >= resources[items]:
             print(f"Sorry there is not enough {items}.")
-            resources_out = True
-            return resources_out        
+            return False
+    return True
 
 def coin_counter(prompt):
     quarters = 0.25 * float(input("How many quarters?"))
@@ -48,12 +48,12 @@ def coin_counter(prompt):
     total = sum([quarters,dimes,nickles,pennies])
 
     if total >= MENU[prompt]['cost']:
-        print("Congrats, you have enough money for this")
+        print(f"Congrats, you have enough money for this, the cost will be {MENU[prompt]['cost']}")
+        return MENU[prompt]['cost']
+        
     else: print("We have an issue here, you don't have the money.")
 
-    print(round(total, 2))
-    return(total)
-
+    
 machine_on = True
 
 while machine_on:
@@ -68,17 +68,16 @@ while machine_on:
         print(f"Money: ${money}")
     elif prompt == "espresso":
         print("espresso selected")
-        if resources_sufficient(prompt) == None:
+        if resources_sufficient(prompt) == True:
             print(f"There are enough resources, we can proceed to the next task")
-        break   
     elif prompt == "latte":
         print("latte selected")
-        if resources_sufficient(prompt) == None:   
-            coin_counter(prompt)
-        break   
+        if resources_sufficient(prompt) == True:   
+            payment = coin_counter(prompt)
+            money += payment
     elif prompt == "cappucino":
-        if resources_sufficient(prompt) == None:
+        if resources_sufficient(prompt) == True:
             print(f"cappucino selected")
-        break
+
     
 
