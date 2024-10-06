@@ -39,11 +39,27 @@ def resources_sufficient(prompt):
             resources_out = True
             return resources_out        
 
-prompt = input(f"What would you like? (espresso/latte/cappuccino):")
+def coin_counter():
+    quarters = float(input("How many quarters?"))
+    dimes = float(input("How many dimes?"))
+    nickles = float(input("How many nickles?"))
+    pennies = float(input("How many pennies?"))
+
+    quarters *= 0.25
+    dimes *= 0.10
+    nickles *= 0.05
+    pennies *= 0.01
+
+    total = sum(quarters,dimes,nickles,pennies)
+
+    print(total)
+    return(total)
 
 machine_on = True
 
 while machine_on:
+    
+    prompt = input(f"What would you like? (espresso/latte/cappuccino):")
 
     if prompt == 'off':
         break
@@ -51,7 +67,6 @@ while machine_on:
         for item in resources:
             print(f"{item.capitalize()}: {resources[item]}{"g" if item == "coffee" else "ml"}")
         print(f"Money: ${money}")
-        break
     elif prompt == "espresso":
         print("espresso selected")
         if resources_sufficient(prompt) == None:
@@ -61,6 +76,7 @@ while machine_on:
         print("latte selected")
         if resources_sufficient(prompt) == None:
             print(f"There are enough resources, we can proceed to the next task")
+            coin_counter()
         break   
     elif prompt == "cappucino":
         if resources_sufficient(prompt) == None:
