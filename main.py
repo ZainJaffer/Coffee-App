@@ -50,9 +50,9 @@ def coin_counter():
     nickles *= 0.05
     pennies *= 0.01
 
-    total = sum(quarters,dimes,nickles,pennies)
+    total = sum([quarters,dimes,nickles,pennies])
 
-    print(total)
+    print(round(total, 2))
     return(total)
 
 machine_on = True
