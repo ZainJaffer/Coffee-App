@@ -63,11 +63,8 @@ def coin_counter(prompt):
 
 def resource_deductor(prompt):
     
-    print(resources)
-
     for items in resources:
         resources[items] -= MENU[prompt]['ingredients'][items]
-        print(resources)
     return resources
 
 machine_on = True
@@ -82,29 +79,15 @@ while machine_on:
         for item in resources:
             print(f"{item.capitalize()}: {resources[item]}{'g' if item == 'coffee' else 'ml'}")
         print(f"Money: ${money}")
-    elif prompt == "espresso":
+    else:
+        drink = MENU[prompt]
         print(prompt, "selected")
-        if resources_sufficient(prompt) == True:   
+        if resources_sufficient(prompt):   
             payment = coin_counter(prompt)
             if payment != 0:
                 resource_deductor(prompt)
             money += payment 
-    elif prompt == "latte":
-        print(prompt, "selected")
-        if resources_sufficient(prompt) == True:   
-            payment = coin_counter(prompt)
-            if payment != 0:
-                resource_deductor(prompt)
-            money += payment 
-    elif prompt == "cappuccino":
-        print(prompt, "selected")
-        if resources_sufficient(prompt) == True:   
-            payment = coin_counter(prompt)
-            if payment != 0:
-                resource_deductor(prompt)
-            money += payment 
-
-    
+ 
 
 #TODO: how to change code if dict doesn't specify milk for espresso.
 #TODO: implement error handling 
