@@ -80,7 +80,6 @@ while machine_on:
             print(f"{item.capitalize()}: {resources[item]}{'g' if item == 'coffee' else 'ml'}")
         print(f"Money: ${money}")
     else:
-        drink = MENU[prompt]
         print(prompt, "selected")
         if resources_sufficient(prompt):   
             payment = coin_counter(prompt)
