@@ -32,11 +32,13 @@ resources = {
 }
 
 money = 0
+payment = 0
 
 def resources_sufficient(prompt):
     for items in resources:
         if MENU[prompt]['ingredients'][items] >= resources[items]:
             print(f"Sorry there is not enough {items}.")
+            return False
     return True
 
 def coin_counter(prompt):
@@ -59,6 +61,15 @@ def coin_counter(prompt):
     else: print("Sorry that's not enough money. Money refunded.")
     return 0
 
+def resource_deductor(prompt):
+    
+    print(resources)
+
+    for items in resources:
+        resources[items] -= MENU[prompt]['ingredients'][items]
+        print(resources)
+    return resources
+
 machine_on = True
 
 while machine_on:
@@ -69,24 +80,31 @@ while machine_on:
         break
     elif prompt == "report":
         for item in resources:
-            print(f"{item.capitalize()}: {resources[item]}{"g" if item == "coffee" else "ml"}")
+            print(f"{item.capitalize()}: {resources[item]}{'g' if item == 'coffee' else 'ml'}")
         print(f"Money: ${money}")
     elif prompt == "espresso":
         print(prompt, "selected")
         if resources_sufficient(prompt) == True:   
             payment = coin_counter(prompt)
-            money += payment
+            if payment != 0:
+                resource_deductor(prompt)
+            money += payment 
     elif prompt == "latte":
         print(prompt, "selected")
         if resources_sufficient(prompt) == True:   
             payment = coin_counter(prompt)
-            money += payment
-    elif prompt == "cappucino":
+            if payment != 0:
+                resource_deductor(prompt)
+            money += payment 
+    elif prompt == "cappuccino":
         print(prompt, "selected")
         if resources_sufficient(prompt) == True:   
             payment = coin_counter(prompt)
-            money += payment
+            if payment != 0:
+                resource_deductor(prompt)
+            money += payment 
 
     
 
-#TODO, how to change code if dict doesn't specify milk for espresso.
+#TODO: how to change code if dict doesn't specify milk for espresso.
+#TODO: implement error handling 
