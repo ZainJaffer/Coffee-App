@@ -3,6 +3,7 @@ MENU = {
         "ingredients": {
             "water": 50,
             "coffee": 18,
+            "milk" : 0,
         },
         "cost": 1.5,
     },
@@ -48,7 +49,7 @@ def coin_counter(prompt):
 
     total = sum([quarters,dimes,nickles,pennies])
 
-    change = total - MENU[prompt]['cost']
+    change = round(total - MENU[prompt]['cost'],2)
 
     if total == MENU[prompt]['cost']:
         return MENU[prompt]['cost']
@@ -71,17 +72,21 @@ while machine_on:
             print(f"{item.capitalize()}: {resources[item]}{"g" if item == "coffee" else "ml"}")
         print(f"Money: ${money}")
     elif prompt == "espresso":
-        print("espresso selected")
-        if resources_sufficient(prompt) == True:
-            print(f"There are enough resources, we can proceed to the next task")
+        print(prompt, "selected")
+        if resources_sufficient(prompt) == True:   
+            payment = coin_counter(prompt)
+            money += payment
     elif prompt == "latte":
-        print("latte selected")
+        print(prompt, "selected")
         if resources_sufficient(prompt) == True:   
             payment = coin_counter(prompt)
             money += payment
     elif prompt == "cappucino":
-        if resources_sufficient(prompt) == True:
-            print(f"cappucino selected")
+        print(prompt, "selected")
+        if resources_sufficient(prompt) == True:   
+            payment = coin_counter(prompt)
+            money += payment
 
     
 
+#TODO, how to change code if dict doesn't specify milk for espresso.
