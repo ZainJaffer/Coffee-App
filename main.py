@@ -36,10 +36,11 @@ def resources_sufficient(prompt):
     for items in resources:
         if MENU[prompt]['ingredients'][items] >= resources[items]:
             print(f"Sorry there is not enough {items}.")
-            return False
     return True
 
 def coin_counter(prompt):
+    print(f"The cost will be ${MENU[prompt]['cost']}")
+    
     quarters = 0.25 * float(input("How many quarters?"))
     dimes = 0.10 * float(input("How many dimes?"))
     nickles =  0.05 * float(input("How many nickles?"))
@@ -47,13 +48,16 @@ def coin_counter(prompt):
 
     total = sum([quarters,dimes,nickles,pennies])
 
-    if total >= MENU[prompt]['cost']:
-        print(f"Congrats, you have enough money for this, the cost will be {MENU[prompt]['cost']}")
-        return MENU[prompt]['cost']
-        
-    else: print("We have an issue here, you don't have the money.")
+    change = total - MENU[prompt]['cost']
 
-    
+    if total == MENU[prompt]['cost']:
+        return MENU[prompt]['cost']
+    elif total > MENU[prompt]['cost']:
+        print(f"Here is ${change} in change")
+        return MENU[prompt]['cost']    
+    else: print("Sorry that's not enough money. Money refunded.")
+    return 0
+
 machine_on = True
 
 while machine_on:
